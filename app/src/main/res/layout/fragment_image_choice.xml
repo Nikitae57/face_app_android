@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".representation.view.ImageChoiceFragment">
+
+    <ImageButton
+        android:id="@+id/ibtnGallery"
+        android:layout_width="@dimen/image_choice_btn_size"
+        android:layout_height="@dimen/image_choice_btn_size"
+        android:background="@drawable/background_rounded_corners"
+        android:src="@drawable/ic_file"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ibtnCamera"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/open_gallery" />
+
+    <ImageButton
+        android:id="@+id/ibtnCamera"
+        android:layout_width="@dimen/image_choice_btn_size"
+        android:layout_height="@dimen/image_choice_btn_size"
+        android:background="@drawable/background_rounded_corners"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ibtnGallery"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/take_photo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

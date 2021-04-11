@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FaceAppAndroid</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_gallery">Open gallery</string>
+    <string name="take_photo">Take photo</string>
+</resources>

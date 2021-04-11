@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_choice_btn_size">164dp</dimen>
+    <dimen name="image_choice_icon_size">150dp</dimen>
+    <dimen name="image_choice_border_radius">64dp</dimen>
+</resources>
