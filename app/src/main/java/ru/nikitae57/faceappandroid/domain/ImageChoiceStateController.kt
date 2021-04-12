@@ -17,7 +17,7 @@ class ImageChoiceStateController @Inject constructor()
             is ImageChoiceEvent.ImageIsNotPicked -> emit(ImageChoiceState.Initial)
             is ImageChoiceEvent.ImageIsPicked -> {
                 emit(ImageChoiceState.ImageIsPicked(event.image))
-//                emit(ImageChoiceState.Initial)
+                emit(ImageChoiceState.Initial)
             }
         }
     }

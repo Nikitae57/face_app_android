@@ -2,6 +2,7 @@ package ru.nikitae57.faceappandroid.representation.view
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -130,12 +131,26 @@ class ImageChoiceFragment : Fragment(),
         Timber.d("Initial state")
     }
 
-    private fun imagePickedState(image: PickedImage): Completable = Completable.fromCallable {
+    private fun imagePickedState(image: PickedImage): Completable {
         Timber.d("Image is picked state: $image")
-        parentFragmentManager.commit {
-            val fragment = ImageVerificationFragment.newInstance(image.uri)
-            addToBackStack(null)
-            add(R.id.fragment_container, fragment)
+        return navigateToImageVerificationFragment(image.uri)
+            .andThen { viewModel.showedImage() }
+    }
+
+    private fun navigateToImageVerificationFragment(pickedImageUri: Uri): Completable {
+        return Completable.fromAction {
+            parentFragmentManager.commit {
+                val fragment = ImageVerificationFragment.newInstance(pickedImageUri)
+                addToBackStack("null")
+                setReorderingAllowed(true)
+                setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
+                replace(R.id.fragment_container, fragment)
+            }
         }
     }
 

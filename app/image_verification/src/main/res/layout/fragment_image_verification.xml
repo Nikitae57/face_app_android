@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:background="?attr/selectableItemBackground"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_arrow_back"
                 app:layout_constraintBottom_toBottomOf="@+id/verificationTile"
                 app:layout_constraintStart_toStartOf="@+id/verificationTile"

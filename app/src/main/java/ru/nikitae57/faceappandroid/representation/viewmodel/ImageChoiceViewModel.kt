@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.esafirm.imagepicker.features.common.BaseConfig
 import com.esafirm.imagepicker.model.Image
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -28,8 +29,8 @@ class ImageChoiceViewModel
     init {
         stateController.state
             .subscribeOn(Schedulers.computation())
-            .observeOn(Schedulers.computation())
-            .subscribe(_state::postValue)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_state::setValue)
     }
 
     fun getCameraLauncherConfig(): Single<BaseConfig> {
@@ -52,6 +53,10 @@ class ImageChoiceViewModel
     fun imageIsPicked(image: Image): Completable = Completable.fromCallable {
         val imageDomain = PickedImage(image.uri)
         stateController.addEvent(ImageChoiceEvent.ImageIsPicked(imageDomain))
+    }
+
+    fun showedImage(): Completable = Completable.fromCallable {
+//        state
     }
 
     fun imageIsNotPicked(): Completable = Completable.fromCallable {

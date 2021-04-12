@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -30,8 +31,8 @@ class ImageVerificationViewModel
     init {
         stateController.state
             .subscribeOn(Schedulers.computation())
-            .observeOn(Schedulers.computation())
-            .subscribe(_state::postValue)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_state::setValue)
     }
 
     fun setImageToVerify(image: ImageToVerify): Completable = Completable.fromAction {
