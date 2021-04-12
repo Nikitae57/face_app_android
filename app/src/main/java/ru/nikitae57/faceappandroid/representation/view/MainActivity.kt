@@ -1,11 +1,9 @@
 package ru.nikitae57.faceappandroid.representation.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.esafirm.imagepicker.features.registerImagePicker
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nikitae57.faceappandroid.R
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -15,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, ImageChoiceFragment.newInstance())
+                    .replace(R.id.fragment_container, ImageChoiceFragment.newInstance())
                     .commitNow()
         }
     }

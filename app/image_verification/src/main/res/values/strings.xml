@@ -1,0 +1,8 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="selected_image">Selected image</string>
+    <string name="image_confirmation_hint">Are you sure you want to send this image?</string>
+    <string name="cancel_button">Cancel button</string>
+    <string name="accept_button">Accept button</string>
+</resources>

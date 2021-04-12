@@ -10,23 +10,24 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.toPublisher
 import com.esafirm.imagepicker.features.ImagePickerLauncher
 import com.esafirm.imagepicker.features.registerImagePicker
 import com.jakewharton.rxbinding4.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.nikitae57.common.representation.UiStateListener
+import ru.nikitae57.faceappandroid.R
 import ru.nikitae57.faceappandroid.databinding.FragmentImageChoiceBinding
 import ru.nikitae57.faceappandroid.domain.model.PickedImage
 import ru.nikitae57.faceappandroid.representation.viewmodel.ImageChoiceState
 import ru.nikitae57.faceappandroid.representation.viewmodel.ImageChoiceViewModel
+import ru.nikitae57.image_verification.presentation.view.ImageVerificationFragment
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -37,7 +38,6 @@ class ImageChoiceFragment : Fragment(),
     private val binding get() = _binding!!
 
     private val viewModel: ImageChoiceViewModel by viewModels()
-    private val compositeDisposable = CompositeDisposable()
 
     private lateinit var takePhotoLauncher: ImagePickerLauncher
     private val pickImageFromGalleryLauncher = registerForActivityResult(
@@ -48,13 +48,13 @@ class ImageChoiceFragment : Fragment(),
                 && result.data?.data != null
             ) {
                 val uri = result.data?.data!!
-                viewModel.imageIsPicked(uri)
+                viewModel.imageIsPicked(uri).subscribe()
             } else {
-                viewModel.imageIsNotPicked()
+                viewModel.imageIsNotPicked().subscribe()
             }
         } catch (ex: Exception) {
             Timber.e(ex)
-            viewModel.imageIsNotPicked()
+            viewModel.imageIsNotPicked().subscribe()
         }
     }
 
@@ -113,11 +113,11 @@ class ImageChoiceFragment : Fragment(),
 
     private fun observeState(stateLiveData: LiveData<ImageChoiceState>) {
         stateLiveData.observe(viewLifecycleOwner) { state ->
-            state?.let { listenState(state) }
+            state?.let { applyState(state) }
         }
     }
 
-    override fun listenState(state: ImageChoiceState) {
+    override fun applyState(state: ImageChoiceState) {
         when (state) {
             is ImageChoiceState.Initial -> initialState().subscribe()
             is ImageChoiceState.ImageIsPicked -> imagePickedState(state.image).subscribe()
@@ -132,6 +132,11 @@ class ImageChoiceFragment : Fragment(),
 
     private fun imagePickedState(image: PickedImage): Completable = Completable.fromCallable {
         Timber.d("Image is picked state: $image")
+        parentFragmentManager.commit {
+            val fragment = ImageVerificationFragment.newInstance(image.uri)
+            addToBackStack(null)
+            add(R.id.fragment_container, fragment)
+        }
     }
 
     private fun takingPhotoState(): Completable {

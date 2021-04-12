@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'

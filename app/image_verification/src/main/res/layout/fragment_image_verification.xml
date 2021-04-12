@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageVerificationFragment"
+    android:background="@drawable/background_gradient"
+    >
+
+    <ImageView
+        android:id="@+id/ivImageToVerify"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/image_to_verify_margin"
+        app:layout_constraintBottom_toTopOf="@+id/verificationTile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/selected_image" />
+
+
+    <LinearLayout
+        android:id="@+id/verificationTile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/background_rounded_corners_top"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/image_confirmation_hint"
+            android:gravity="center"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintBottom_toTopOf="@id/ibCancel"
+            app:layout_constraintEnd_toEndOf="@id/verificationTile"
+            app:layout_constraintStart_toStartOf="@id/verificationTile" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/ibCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@+id/verificationTile"
+                app:layout_constraintStart_toStartOf="@+id/verificationTile"
+                android:contentDescription="@string/cancel_button" />
+
+            <ImageButton
+                android:id="@+id/ibAccept"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/confirmation_btn_background"
+                android:layout_marginLeft="48dp"
+                android:src="@drawable/ic_check"
+                app:layout_constraintBottom_toBottomOf="@id/ibCancel"
+                app:layout_constraintEnd_toEndOf="@id/verificationTile"
+                app:layout_constraintStart_toEndOf="@+id/ibCancel"
+                app:layout_constraintTop_toTopOf="@id/ibCancel"
+                android:contentDescription="@string/accept_button" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

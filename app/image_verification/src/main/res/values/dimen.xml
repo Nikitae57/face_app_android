@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="verification_tile_height">300dp</dimen>
+    <dimen name="image_to_verify_margin">48dp</dimen>
+    <dimen name="verification_btn_icon_size">100dp</dimen>
+</resources>
